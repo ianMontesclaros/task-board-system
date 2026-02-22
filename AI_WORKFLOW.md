@@ -42,7 +42,7 @@
 - State management logic
 - The `.env.example` and README — written fresh
 
-## 4. ime Management
+## 4. Time Management
 
 **What I built first:**
 

@@ -23,10 +23,10 @@ I used standard REST conventions for simplicity.
 ### Endpoint Structure
 
 ```
-/api/boards          → Collection operations (GET all, POST create)
-/api/boards/[id]     → Resource operations (GET one, PATCH update, DELETE)
-/api/tasks           → Collection with ?boardId=&status= query filters
-/api/tasks/[id]      → Resource operations (GET, PATCH, DELETE)
+/api/boards
+/api/boards/[id]
+/api/tasks
+/api/tasks/[id]
 ```
 
 ### PATCH
