@@ -1,4 +1,5 @@
 import { STATUS_LABELS, Task, TaskStatus } from "@/lib/types";
+import TaskCard from "./TaskCard";
 
 function StatusColumn({
   status,
@@ -25,7 +26,16 @@ function StatusColumn({
             No tasks
           </div>
         ) : (
-          tasks.map((task) => <div></div>)
+          tasks.map((task) => (
+            <div>
+              <TaskCard
+                key={task.id}
+                task={task}
+                onUpdate={onUpdate}
+                onDelete={onDelete}
+              />
+            </div>
+          ))
         )}
       </div>
     </div>
