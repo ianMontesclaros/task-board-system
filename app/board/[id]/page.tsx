@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect, useCallback, use } from "react";
-import { BoardWithTasks } from "@/lib/types";
+import { BoardWithTasks, Task } from "@/lib/types";
 
 import Link from "next/link";
+import CreateTaskModal from "@/app/_components/CreateTaskModal";
 
 export default function BoardPage({
   params,
@@ -15,6 +16,7 @@ export default function BoardPage({
   const [board, setBoard] = useState<BoardWithTasks | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [showCreate, setShowCreate] = useState(false);
 
   const fetchBoard = useCallback(async () => {
     try {
@@ -32,6 +34,13 @@ export default function BoardPage({
   useEffect(() => {
     fetchBoard();
   }, [fetchBoard]);
+
+  function handleTaskCreated(task: Task) {
+    setBoard((prev) =>
+      prev ? { ...prev, tasks: [task, ...prev.tasks] } : prev,
+    );
+    setShowCreate(false);
+  }
 
   if (loading) {
     return (
@@ -66,7 +75,6 @@ export default function BoardPage({
               Go back
             </Link>
           </div>
-
           <div className="flex items-center justify-between gap-4 flex-wrap">
             <div className="flex items-center gap-3">
               <h1 className="font-display text-2xl ">{board.name}</h1>
@@ -76,15 +84,25 @@ export default function BoardPage({
                 </span>
               )}
             </div>
-
             <div className="flex items-center gap-2">
-              <button className="flex items-center gap-2 px-4 py-2 bg-black rounded-xl  transition-all font-medium text-white text-sm">
+              <button
+                onClick={() => setShowCreate(true)}
+                className="flex items-center gap-2 px-4 py-2 bg-black text-cream rounded-xl  transition-all font-medium text-white text-sm"
+              >
                 Add Task
               </button>
             </div>
           </div>
         </div>
       </header>
+
+      {showCreate && (
+        <CreateTaskModal
+          boardId={board.id}
+          onClose={() => setShowCreate(false)}
+          onCreated={handleTaskCreated}
+        />
+      )}
     </main>
   );
 }
