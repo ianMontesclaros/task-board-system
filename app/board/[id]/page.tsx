@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useEffect, useCallback, use } from "react";
-import { BoardWithTasks, Task } from "@/lib/types";
+import { BoardWithTasks, Task, TaskStatus, STATUS_ORDER } from "@/lib/types";
 
-import Link from "next/link";
 import CreateTaskModal from "@/app/_components/CreateTaskModal";
+import StatusColumn from "@/app/_components/StatusColumn";
+import Link from "next/link";
 
 export default function BoardPage({
   params,
@@ -35,6 +36,23 @@ export default function BoardPage({
     fetchBoard();
   }, [fetchBoard]);
 
+  function handleTaskUpdate(updated: Task) {
+    setBoard((prev) =>
+      prev
+        ? {
+            ...prev,
+            tasks: prev.tasks.map((t) => (t.id === updated.id ? updated : t)),
+          }
+        : prev,
+    );
+  }
+
+  function handleTaskDelete(id: string) {
+    setBoard((prev) =>
+      prev ? { ...prev, tasks: prev.tasks.filter((t) => t.id !== id) } : prev,
+    );
+  }
+
   function handleTaskCreated(task: Task) {
     setBoard((prev) =>
       prev ? { ...prev, tasks: [task, ...prev.tasks] } : prev,
@@ -62,6 +80,14 @@ export default function BoardPage({
       </div>
     );
   }
+
+  const tasksByStatus = STATUS_ORDER.reduce(
+    (acc, s) => {
+      acc[s] = board.tasks.filter((t) => t.status === s);
+      return acc;
+    },
+    {} as Record<TaskStatus, Task[]>,
+  );
 
   return (
     <main className="min-h-screen bg-white">
@@ -95,6 +121,18 @@ export default function BoardPage({
           </div>
         </div>
       </header>
+
+      <div className="flex gap-5 overflow-x-auto p-20">
+        {STATUS_ORDER.map((status) => (
+          <StatusColumn
+            key={status}
+            status={status}
+            tasks={tasksByStatus[status]}
+            onUpdate={handleTaskUpdate}
+            onDelete={handleTaskDelete}
+          />
+        ))}
+      </div>
 
       {showCreate && (
         <CreateTaskModal
