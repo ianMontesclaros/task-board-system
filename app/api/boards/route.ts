@@ -12,9 +12,11 @@ export async function GET() {
         },
       },
     });
+
     return NextResponse.json(boards);
   } catch (error) {
     console.error("GET /api/boards error:", error);
+
     return NextResponse.json(
       { error: "Failed to fetch boards" },
       { status: 500 },
@@ -42,6 +44,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(board, { status: 201 });
   } catch (error) {
     console.error("POST /api/boards error:", error);
+
     return NextResponse.json(
       { error: "Failed to create board" },
       { status: 500 },
