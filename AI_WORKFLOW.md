@@ -16,7 +16,7 @@
 
 **Prompt 2:**
 
-> "Write API route for POST /api/boards. It should accept name, description, and color in the request body. Validate that name is present and non-empty. Return 400 if name is missing, 201 with the created board on success, and 500 for database errors. Use Prisma."
+> "Write the API route for POST /api/boards. It should accept name, description, and color in the request body. Validate that name is present and non-empty. Return 400 if name is missing, 201 with the created board on success, and 500 for database errors. Use Prisma."
 
 **Why I wrote it this way:** I wanted to make sure I got the right output on first attempt.
 
@@ -40,7 +40,6 @@
 - Page components
 - Reusable components
 - State management logic
-- The `.env.example` and README — written fresh
 
 ## 4. Time Management
 

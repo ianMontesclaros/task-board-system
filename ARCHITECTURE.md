@@ -4,7 +4,7 @@
 
 ### Next.js App Router (vs Pages Router)
 
-I chose **App Router** because it's the current standard for new Next.js projects.
+I chose **App Router** because it's the current standard for Next.js projects.
 
 ### PostgreSQL
 
@@ -12,7 +12,7 @@ I chose **PostgreSQL** because it has more rich features compared to the other o
 
 ### Prisma ORM
 
-I used Prisma because it has a clean migration system and Type-safe queries that integrate with TypeScript automatically
+I used Prisma because it has a clean migration system and Type-safe queries that integrate with TypeScript automatically.
 
 ## 2. How did you design your API?
 
