@@ -47,9 +47,9 @@ function CreateBoardModal({
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
       onClick={onClose}
     >
-      <div className="absolute inset-0  backdrop-blur-sm" />
+      <div className="absolute inset-0 backdrop-blur-sm" />
       <div
-        className="relative z-10 w-full max-w-md bg-cream rounded-2xl shadow-2xl border  animate-scale-in bg-white"
+        className="relative z-10 w-full max-w-md rounded-2xl shadow-2xl border animate-scale-in bg-white"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="p-6 border-b ">
@@ -84,7 +84,7 @@ function CreateBoardModal({
               onChange={(e) => setDescription(e.target.value)}
               placeholder="What's this board for?"
               rows={2}
-              className="w-full px-3 py-2.5 rounded-lg border  bg-white  focus:outline-none focus:ring-2 focus:ring-amber/50 focus:border-amber transition-all resize-none"
+              className="w-full px-3 py-2.5 rounded-lg border bg-white focus:outline-none focus:ring-2 focus:ring-amber/50 focus:border-amber transition-all resize-none"
             />
           </div>
 
@@ -92,7 +92,7 @@ function CreateBoardModal({
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-4 py-2.5 rounded-lg border  transition-all font-medium"
+              className="flex-1 px-4 py-2.5 rounded-lg border transition-all font-medium"
             >
               Cancel
             </button>

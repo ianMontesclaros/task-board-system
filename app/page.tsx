@@ -1,13 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Board } from "@/lib/types";
 
 import CreateBoardModal from "./_components/CreateBoardModal";
+import BoardCard from "./_components/BoardCard";
 
 export default function DashboardPage() {
   const [boards, setBoards] = useState<Board[]>([]);
   const [showCreate, setShowCreate] = useState(false);
+
+  const fetchBoards = useCallback(async () => {
+    try {
+      const res = await fetch("/api/boards");
+      const data = await res.json();
+      setBoards(Array.isArray(data) ? data : []);
+    } catch {
+      setBoards([]);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchBoards();
+  }, [fetchBoards]);
 
   function handleCreated(board: Board) {
     setBoards((prev) => [board, ...prev]);
@@ -25,7 +40,7 @@ export default function DashboardPage() {
             onClick={() => setShowCreate(true)}
             className="flex items-center gap-2 px-4 py-2 bg-black text-cream rounded-xl hover:opacity-80 transition-all font-medium text-sm text-white"
           >
-            New Board
+            Add New Board
           </button>
         </div>
       </header>
@@ -36,6 +51,12 @@ export default function DashboardPage() {
             Your Boards
           </h1>
         </div>
+      </div>
+
+      <div className="grid grid-cols-3 gap-4 pl-100 pr-100">
+        {boards.map((board) => (
+          <BoardCard key={board.id} board={board} />
+        ))}
       </div>
 
       {showCreate && (
