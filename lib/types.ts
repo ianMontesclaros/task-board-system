@@ -22,3 +22,15 @@ export interface Board {
   tasks?: Task[];
   _count?: { tasks: number };
 }
+
+export interface BoardWithTasks extends Board {
+  tasks: Task[];
+}
+
+export const STATUS_LABELS: Record<TaskStatus, string> = {
+  todo: "To Do",
+  in_progress: "In Progress",
+  done: "Done",
+};
+
+export const STATUS_ORDER: TaskStatus[] = ["todo", "in_progress", "done"];
